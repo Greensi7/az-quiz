@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A little knowledge. A lot of territory. A local two-player quiz game inspired by AZ-kvíz.">
+  <meta name="application-name" content="AZ / play">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>AZ / play — Make your connection</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%235849c5' d='M32 2 59 17v30L32 62 5 47V17z'/%3E%3Ctext x='32' y='41' fill='white' font-family='sans-serif' font-size='25' font-weight='bold' text-anchor='middle'%3EAZ%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="brand" href="./" aria-label="AZ play home"><span class="brand-mark">AZ</span><span class="brand-slash">/</span> play<span class="brand-dot">.</span></a>
+    <span class="local-badge"><span class="status-dot"></span> ONE SCREEN. TWO PLAYERS.</span>
+    <button id="help-button" class="text-button"><span class="help-icon" aria-hidden="true">?</span> How to play</button>
+  </header>
+
+  <main class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow"><span class="tiny-star" aria-hidden="true">✳</span> A FRIENDLY BATTLE OF BRAINS</p><h1 id="page-title">Make your <span>connection.</span></h1><p id="intro-copy">A little knowledge. A lot of territory. Connect three sides to win.</p></div>
+      <div class="intro-stamp" aria-hidden="true"><span>28</span><div>QUESTIONS.<br>ENDLESS RIVALRY.</div></div>
+    </section>
+
+    <div class="game-layout">
+      <section class="board-card" aria-labelledby="board-heading">
+        <div class="board-heading"><h2 id="board-heading">The playing field</h2><span id="round-label" class="small-label">YOUR NEXT GREAT MATCH</span></div>
+        <div class="players">
+          <div id="red-player" class="player red-player"><span class="player-symbol" aria-hidden="true">●</span><div><span class="player-name">Red player</span><span id="red-status" class="player-status">Ready to play</span></div><strong id="red-score">00</strong></div>
+          <span class="versus">VS</span>
+          <div id="blue-player" class="player blue-player"><span class="player-symbol" aria-hidden="true">◆</span><div><span class="player-name">Blue player</span><span id="blue-status" class="player-status">Ready to play</span></div><strong id="blue-score">00</strong></div>
+        </div>
+        <div class="board-stage">
+          <div class="side-caption side-left" aria-hidden="true">SIDE 01</div><div class="side-caption side-right" aria-hidden="true">SIDE 02</div>
+          <div id="board" class="board" role="group" aria-label="Triangular board: seven rows, 28 tiles"></div>
+          <div class="side-caption side-bottom" aria-hidden="true">SIDE 03</div>
+        </div>
+        <div class="board-bottom"><div class="legend"><span><i class="legend-dot open-dot"></i>Open</span><span><i class="legend-dot red-dot"></i>Red ●</span><span><i class="legend-dot blue-dot"></i>Blue ◆</span><span><i class="legend-dot neutral-dot"></i>Neutral</span></div><span id="board-count" class="small-label">28 TILES · 3 SIDES</span></div>
+        <div id="board-note" class="board-note"><span aria-hidden="true">↗</span> Your route to victory starts with a good question.</div>
+      </section>
+
+      <section id="setup-panel" class="control-card" aria-labelledby="setup-heading">
+        <div class="panel-step"><span class="step-number">01</span><span class="eyebrow">SET THE CHALLENGE</span><span class="small-label">LET’S PLAY</span></div>
+        <h2 id="setup-heading">Bring your questions.</h2><p class="panel-description">Your quiz, your home advantage. Paste at least 28 questions, or start with ours.</p>
+        <form id="setup-form" novalidate>
+          <div class="input-toolbar"><label for="questions">Question bank</label><button id="sample-button" type="button" class="text-button accent">Use sample quiz <span aria-hidden="true">↗</span></button></div>
+          <textarea id="questions" spellcheck="false" maxlength="1000000" aria-describedby="format-hint import-status" placeholder="What is the capital of Czechia?;Prague&#10;Which planet is the Red Planet?;Mars&#10;How many sides does a hexagon have?;6&#10;&#10;One question;answer per line.&#10;Or paste your Drill 2 question bank here."></textarea>
+          <div class="input-bottom"><span id="question-count">0 questions detected</span><label class="format-label"><span class="sr-only">Import format</span><select id="import-format"><option value="auto">Auto-detect format</option><option value="simple">Question;Answer</option><option value="drill">Drill 2 / PDS</option></select></label></div>
+          <p id="format-hint" class="hint">Accepts <code>Question;Answer</code> and Drill 2 banks.<br>Questions are shuffled into 28 tiles each game.</p>
+          <details class="format-details"><summary>Formatting help <span aria-hidden="true">+</span></summary><p>For semicolons or line breaks inside a field, surround that field with double quotes. Write a literal double quote as <code>""</code> inside it.</p><pre>"A question on
+two lines";"An answer; with a semicolon"</pre><p>Drill 2: separate questions with a blank line. Prefix correct choices with <code>&gt;&gt;&gt;</code>. Multiline questions and answers are supported.</p><pre>Which city is in Czechia?
+A) Paris
+&gt;&gt;&gt;B) Prague
+C) Rome</pre><p>Drill 2 options, Markdown and formulas are treated as text or ignored; no embedded code is run. Mark all correct choices when answering aloud.</p></details>
+          <div id="import-status" class="import-status" role="status" aria-live="polite"></div>
+          <button id="start-button" class="button primary start-button" type="submit" disabled>Let’s play <span aria-hidden="true">↗</span></button>
+        </form>
+        <div class="privacy-note"><svg width="14" height="16" viewBox="0 0 16 18" fill="none" aria-hidden="true"><path d="m8 1 6 3v5c0 4-6 7-6 7S2 13 2 9V4z" stroke="currentColor" stroke-width="1.5"/><path d="m5 8 2 2 4-4" stroke="currentColor" stroke-width="1.5"/></svg> Your questions stay in this browser.</div>
+      </section>
+
+      <section id="play-panel" class="control-card play-panel" aria-labelledby="turn-heading" hidden>
+        <div class="panel-step"><span id="turn-symbol" class="step-number">●</span><span id="turn-label" class="eyebrow">RED’S TURN</span><span id="turn-number" class="small-label">TURN 01</span></div>
+        <h2 id="turn-heading" tabindex="-1">Your move, Red.</h2>
+        <p id="turn-description" class="panel-description">Pick an open tile. Make it yours.</p>
+        <div id="turn-content"></div>
+        <div class="match-tools"><button id="restart-button" class="text-button">↻ Restart match</button><button id="reset-button" class="text-button">New quiz ↗</button></div>
+        <div id="save-status" class="privacy-note" role="status">Saved on this browser</div>
+      </section>
+    </div>
+
+    <section class="how-strip" aria-label="The goal"><span class="strip-label">A SIMPLE GAME.<br>A CLEVER STRATEGY.</span><div><span class="rule-number">01</span><p><strong>Pick a tile.</strong><span>Follow your curiosity.</span></p></div><div><span class="rule-number">02</span><p><strong>Know the answer.</strong><span>Claim your territory.</span></p></div><div><span class="rule-number">03</span><p><strong>Connect three sides.</strong><span>Take the bragging rights.</span></p></div></section>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="notice" class="notice" role="status" hidden></div>
+  </main>
+  <footer class="site-footer wrap"><span>An independent game inspired by AZ-kvíz.</span><span>Made for a little friendly competition. <span aria-hidden="true">✳</span></span></footer>
+
+  <dialog id="help-dialog" aria-labelledby="help-title"><div class="dialog-header"><span class="eyebrow">THE PLAYBOOK</span><button class="close-button" data-close="help-dialog" aria-label="Close instructions">×</button></div><h2 id="help-title">Three sides. One winner.</h2><p>Play together on one screen. Red starts; players alternate after every answer or neutral claim. Answer aloud and let your opponent judge.</p><ol class="help-list"><li><strong>Choose an open numbered hexagon.</strong> Its question appears. For multiple-choice questions, name all the correct choices.</li><li><strong>Reveal, then judge.</strong> A correct answer colors the tile for the current player. A wrong answer turns it neutral.</li><li><strong>Use neutral tiles to connect.</strong> You may claim a neutral tile that touches one of your tiles. If you own no tiles, you may claim any neutral tile. Claiming uses your turn, with no new question.</li><li><strong>Reach all three edges.</strong> Win with one connected group of your tiles touching the left, right and bottom sides. Corners count for both sides they touch. Separate groups do not combine.</li></ol><p class="hint">No legal moves? Your turn is passed automatically. If neither player can move, the match is a draw. This is our simplified house rule for neutral tiles, not the official TV rules.</p><p class="hint">Progress saves on this browser and site address only. There is no online matchmaking or synchronization between devices. Clearing browser data removes your save.</p><button class="button primary" data-close="help-dialog">Got it. Game on. <span aria-hidden="true">↗</span></button></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><div class="dialog-header"><span class="eyebrow">A FRESH START</span><button class="close-button" data-close="confirm-dialog" aria-label="Cancel">×</button></div><h2 id="confirm-title">Restart this match?</h2><p id="confirm-description"></p><div class="dialog-actions"><button class="button secondary" data-close="confirm-dialog">Keep playing</button><button id="confirm-action" class="button primary">Restart match</button></div></dialog>
+  <noscript><div class="noscript">Please enable JavaScript to import questions and play this game.</div></noscript>
+</body>
+</html>

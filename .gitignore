@@ -1,0 +1,17 @@
+# Public site files are explicit in publish.sh. Keep local configuration private.
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+coverage/
+test-results/
+playwright-report/
+*.log

@@ -1,0 +1,28 @@
+What is the capital of Czechia?;Prague
+Which planet is known as the Red Planet?;Mars
+How many sides does a hexagon have?;6
+Which river flows through Prague?;The Vltava
+What is the chemical symbol for gold?;Au
+Who wrote Romeo and Juliet?;William Shakespeare
+What is the largest ocean on Earth?;The Pacific Ocean
+How many minutes are in three hours?;180
+What gas do plants absorb during photosynthesis?;Carbon dioxide
+Which country is home to the city of Kyoto?;Japan
+What is the square root of 144?;12
+Which musical instrument usually has 88 keys?;A piano
+What is the tallest mountain above sea level?;Mount Everest
+How many players does one football team have on the pitch at the start of a match?;11
+Which organ pumps blood around the human body?;The heart
+What is the smallest prime number?;2
+Who painted the Mona Lisa?;Leonardo da Vinci
+How many bones are in a typical adult human skeleton?;206
+What language is primarily spoken in Brazil?;Portuguese
+In what year did humans first land on the Moon?;1969
+What is the largest planet in our solar system?;Jupiter
+Which Czech writer wrote The Metamorphosis?;Franz Kafka
+What do bees collect from flowers to make honey?;Nectar
+How many degrees are in a right angle?;90
+Which continent is the Sahara Desert in?;Africa
+What is the main ingredient in guacamole?;Avocado
+Which element has the chemical symbol O?;Oxygen
+What is the name of the galaxy containing our solar system?;The Milky Way
